@@ -1,5 +1,7 @@
 """Module for turn-based combat system"""
 
+import random
+
 def main():
     hero = Character()
     hero.name = "Hero"
@@ -8,12 +10,21 @@ def main():
     hero.maxDamage = 5
     hero.armor = 2
     
+    monster = Character()
+    monster.name = "Monster"
+    monster.hitPoints = 30
+    monster.hitChance = 40
+    monster.maxDamage = 8
+    monster.armor = 0
+    
     hero.printStats()
-
+    monster.printStats()
+    
+    
 class Character(object):
     def __init__(self):
         super().__init__()
-        self.name = "foo"
+        self.name = "Test"
         self.hitPoints = 10
         self.hitChance = 50
         self.maxDamage = 5
@@ -40,11 +51,11 @@ class Character(object):
             self.__hitPoints = 1
             
     @property
-    def chance(self):
+    def hitChance(self):
         return self.__hitChance
     
-    @chance.setter
-    def chance(self, value, min = 0, max = 100, default = 0):
+    @hitChance.setter
+    def hitChance(self, value, min = 0, max = 100, default = 0):
         self.__hitChance = default
         if type(value) == int:
             if value >= min:
@@ -58,11 +69,11 @@ class Character(object):
             print("Hit Chance must be an integer")
             
     @property
-    def damage(self):
+    def maxDamage(self):
         return self.__maxDamage
     
-    @damage.setter
-    def damage(self, value):
+    @maxDamage.setter
+    def maxDamage(self, value):
         if type(value) == int:
             if value > 0:
                 self.__maxDamage = value
@@ -92,11 +103,21 @@ class Character(object):
             
     def printStats(self):
         print(self.name)
-        print("==========")
+        print("===============")
         print(f"Hit Points: {self.hitPoints}")
         print(f"Hit Chance: {self.hitChance}")
         print(f"Max Damage: {self.maxDamage}")
         print(f"Armor: {self.armor}")
         print()
+        
+    def hit():
+        strike = random.randint(0,100)
+        #if strike is less than or equal to lower hitChance
+        if strike <=
+        #elif strike is less than or equal to higher hitChance
+        elif strike <= 
+        else:
+            print("Both miss!")
+        
             
 main()
