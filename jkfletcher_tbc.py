@@ -1,26 +1,7 @@
 """Module for turn-based combat system"""
 
 import random
-
-def main():
-    hero = Character()
-    hero.name = "Hero"
-    hero.hitPoints = 20
-    hero.hitChance = 60
-    hero.maxDamage = 5
-    hero.armor = 2
-    
-    monster = Character()
-    monster.name = "Monster"
-    monster.hitPoints = 30
-    monster.hitChance = 40
-    monster.maxDamage = 8
-    monster.armor = 0
-    
-    hero.printStats()
-    monster.printStats()
-    
-    
+   
 class Character(object):
     def __init__(self):
         super().__init__()
@@ -110,14 +91,39 @@ class Character(object):
         print(f"Armor: {self.armor}")
         print()
         
-    def hit():
-        strike = random.randint(0,100)
-        #if strike is less than or equal to lower hitChance
-        if strike <=
-        #elif strike is less than or equal to higher hitChance
-        elif strike <= 
+    def hit(self, enemy):
+        attack = random.randint(0,100)
+        if attack < self.hitChance:
+            print(f"{self.name} hits {enemy.name}...")
+            damage = random.randint(1, self.maxDamage)
+            print(f"for {damage} point(s) of damage!")
+            if enemy.armor > 0:
+                damage = damage - enemy.armor
+                print(f"{enemy.name}'s armor absorbs {enemy.armor} points")
+            if damage < 0:
+                damage = 0
+            enemy.hitPoints = enemy.hitPoints - damage
         else:
-            print("Both miss!")
-        
+            print(f"{self.name} misses {enemy.name}")
             
-main()
+            
+def fight(player1, player2):
+    keepGoing = True
+    while keepGoing:
+        print()
+        player1.hit(player2)
+        player2.hit(player1)
+        
+        print()
+        
+        if player1.hitPoints <= 0:
+            print(f"{player1.name} is dead. {player2.name} wins!")
+            keepGoing = False
+        elif player2.hitPoints <= 0:
+            print(f"{player2.name} is dead. {player1.name} wins!")
+            keepGoing = False
+        else:
+            print(f"{player1.name}: {player1.hitPoints}")
+            print(f"{player2.name}: {player2.hitPoints}")
+            userClick = input("Press 'enter' for another round.")
+        
